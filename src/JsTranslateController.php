@@ -22,7 +22,7 @@ class JsTranslateController extends Controller
             now()->addHours(1),
             static function () use ($lang, $files) {
                 $strings = [
-                    '__possible_keys' => []
+                    '__possible_keys' => [],
                 ];
                 foreach ($files as $file) {
                     if (Str::endsWith($file, '.json')) {
