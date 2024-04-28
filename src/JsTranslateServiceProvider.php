@@ -4,7 +4,6 @@ namespace LaravelWay\JsTranslate;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use LaravelWay\JsTranslate\Commands\JsTranslateCommand;
 
 class JsTranslateServiceProvider extends PackageServiceProvider
 {
@@ -17,9 +16,7 @@ class JsTranslateServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('jstranslate')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_jstranslate_table')
-            ->hasCommand(JsTranslateCommand::class);
+            ->hasConfigFile('jstranslate')
+            ->hasRoutes(['jstranslate']);
     }
 }
