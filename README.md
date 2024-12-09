@@ -19,15 +19,17 @@ This is the contents of the published config file:
 ```php
 return [
     'files' => [
-    
-    ]
+    ],
+
+    'translate_script_path' => 'assets/translate.js',
+    'translations_path' => 'assets/translations.{lang}.js',
 ];
 ```
 
 ## Build Script
 
 ```bash
-npx webpack --mode production
+npm run build
 ```
 
 ## Testing

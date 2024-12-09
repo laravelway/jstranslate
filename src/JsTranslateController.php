@@ -2,60 +2,83 @@
 
 namespace LaravelWay\JsTranslate;
 
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use JsonException;
 
 class JsTranslateController extends Controller
 {
-    public function __invoke()
+    /**
+     * @throws JsonException
+     */
+    public function script(): Response
     {
-        $lang = config('app.locale');
+        $jsFileContent = file_get_contents(base_path('/vendor/laravelway/jstranslate/dist/translate.js'));
+
+        $filePath = config('jstranslate.translate_script_path');
+        file_put_contents(public_path($filePath), $jsFileContent);
+
+        return response($jsFileContent)->header('Content-Type', 'text/javascript');
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function translations(string $lang): Response
+    {
         $files = config('jstranslate.files', []);
 
         $files = collect($files)
-            ->map(fn ($file) => base_path("lang/{$lang}/{$file}.php"))
-            ->add(base_path("lang/{$lang}.json"));
+            ->map(fn ($file) => lang_path("{$lang}/{$file}.php"))
+            ->add(lang_path("{$lang}.json"));
 
-        $strings = Cache::remember(
-            "jstranslations.{$lang}.js",
-            now()->addHours(1),
-            static function () use ($lang, $files) {
-                $strings = [
-                    '__possible_keys' => [],
-                ];
-                foreach ($files as $file) {
-                    if (Str::endsWith($file, '.json')) {
-                        if (file_exists($file)) {
-                            $name = '__global';
-                            $content = json_decode(file_get_contents($file));
-                        }
-                    } else {
-                        if (file_exists($file)) {
-                            $name = basename($file, '.php');
-                            $strings['__possible_keys'][] = $name;
-                            $content = require $file;
-                        }
-                    }
+        $strings = Cache::remember("jstranslations.{$lang}.js", now()->addHour(), static function () use ($files, $lang) {
+            $strings = [
+                '__possible_keys' => [],
+            ];
 
-                    if (isset($name)) {
-                        $strings[$name] = $content;
-                        unset($name);
-                    }
+            foreach ($files as $file) {
+                if (! file_exists($file)) {
+                    continue;
+                }
+                if (Str::endsWith($file, '.json')) {
+                    $name = '__global';
+                    $content = json_decode(file_get_contents($file), false, 512, JSON_THROW_ON_ERROR);
+                } else {
+                    $name = basename($file, '.php');
+                    $strings['__possible_keys'][] = $name;
+                    $content = require $file;
                 }
 
-                return $strings;
-            });
+                if (isset($name, $content)) {
+                    $strings[$name] = $content;
+                    unset($name);
+                }
+            }
 
-        $encoded = json_encode($strings, JSON_THROW_ON_ERROR | JSON_UNESCAPED_LINE_TERMINATORS
-            | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_IGNORE);
+            return $strings;
+        });
 
-        $jsFileContent = file_get_contents(base_path('/vendor/laravelway/jstranslate/dist/bundle.js'));
+        $encoded = json_encode(
+            $strings,
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_LINE_TERMINATORS
+            | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_IGNORE
+        );
 
         $content = <<<JS
-window.i18n = $encoded;
-$jsFileContent
+if (window.i18n === undefined) {
+    window.i18n = {};
+}
+
+window.i18n['$lang'] = $encoded;
 JS;
+
+        $filePath = config('jstranslate.translations_path');
+        $filePath = str_replace('{lang}', $lang, $filePath);
+
+        file_put_contents(public_path($filePath), $content);
 
         return response($content)->header('Content-Type', 'text/javascript');
     }
