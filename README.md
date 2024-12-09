@@ -27,7 +27,7 @@ return [
 ## Build Script
 
 ```bash
-npx webpack --mode production
+npm run build
 ```
 
 ## Testing

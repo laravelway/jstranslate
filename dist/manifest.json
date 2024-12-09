@@ -1,0 +1,8 @@
+{
+  "resources/translate.js": {
+    "file": "translate.js",
+    "name": "translate",
+    "src": "resources/translate.js",
+    "isEntry": true
+  }
+}
