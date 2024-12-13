@@ -18,7 +18,7 @@ class ClearCacheCommand extends Command
         @unlink(public_path(config('jstranslate.translate_script_path')));
 
         $pattern = str_replace('{lang}', '*', config('jstranslate.translations_path'));
-        foreach(glob(public_path($pattern)) as $file) {
+        foreach (glob(public_path($pattern)) as $file) {
             $filename = basename($file);
             $parts = explode('.', $filename);
             $lang = $parts[1] ?? 'en';
