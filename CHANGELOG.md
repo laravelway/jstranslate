@@ -19,3 +19,6 @@ v2.0.0
 * Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/laravelway/jstranslate/pull/2
 
 **Full Changelog**: https://github.com/laravelway/jstranslate/compare/1.0.0...v2.0.0
+
+v2.0.1
+- Added markdown parser

@@ -1,4 +1,5 @@
 import getLodash from 'lodash/get'
+import MarkdownIt from "markdown-it";
 
 const defaultLocale = 'en'
 const getLocale = () => document.documentElement.lang || defaultLocale;
@@ -25,6 +26,16 @@ const isReactElement = (obj) =>
  * __('auth.failed', {name: 'John'}) -> 'Authentication failed for John'
  */
 window.trans = window.translate = window.__  = function(string, args){
+    const md = new MarkdownIt({
+        html: true,
+    });
+
+    // Disable paragraph wrapping by overriding paragraph rules
+    md.renderer.rules.paragraph_open = () => '';
+    md.renderer.rules.paragraph_close = () => '';
+
+    string = md.render(string);
+
     const key = string.substr(0, string.indexOf('.'))
     const originalString = string
     const locale = getLocale()

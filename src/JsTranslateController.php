@@ -34,7 +34,7 @@ class JsTranslateController extends Controller
             ->map(fn ($file) => lang_path("{$lang}/{$file}.php"))
             ->add(lang_path("{$lang}.json"));
 
-        $strings = Cache::remember("jstranslations.{$lang}.js", now()->addHour(), static function () use ($files, $lang) {
+        $strings = Cache::remember("jstranslations.{$lang}.js", now()->addHour(), static function () use ($files) {
             $strings = [
                 '__possible_keys' => [],
             ];
@@ -52,10 +52,8 @@ class JsTranslateController extends Controller
                     $content = require $file;
                 }
 
-                if (isset($name, $content)) {
-                    $strings[$name] = $content;
-                    unset($name);
-                }
+                $strings[$name] = $content;
+                unset($name);
             }
 
             return $strings;
