@@ -31,3 +31,6 @@ v2.0.0
 v2.0.1
 
 - Added markdown parser
+
+v2.0.2
+- Add parameter for markdown parser
