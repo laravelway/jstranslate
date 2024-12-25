@@ -7,6 +7,14 @@ v2.0.0
 - Switch from webpack to vite
 - Added command do clear cached files
 
+## v2.0.2 - 2024-12-25
+
+### What's Changed
+
+- Added parameter for markdown
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.0.1...v2.0.2
+
 ## v2.0.1 - 2024-12-18
 
 ### What's Changed
@@ -33,4 +41,5 @@ v2.0.1
 - Added markdown parser
 
 v2.0.2
+
 - Add parameter for markdown parser
