@@ -7,6 +7,17 @@ v2.0.0
 - Switch from webpack to vite
 - Added command do clear cached files
 
+## v2.1.0 - 2024-12-26
+
+### What's Changed
+
+- Added exports for translate function (to use it in ssr)
+- Added actions for generate files
+- Change caching strategy
+- Removed window and document from js code
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.0.2...v2.1.0
+
 ## v2.0.2 - 2024-12-25
 
 ### What's Changed
