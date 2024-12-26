@@ -3698,11 +3698,7 @@ const fi = (u = 16, e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012
   const n = u.substr(0, u.indexOf(".")), c = u;
   (!n || !H[ou].__possible_keys.includes(n) && !H[Fe].__possible_keys.includes(n)) && (u = "__global." + u);
   let t = O0(H[ou], u);
-  if (!t) {
-    const s = new CustomEvent("translation:missing", { detail: { key: c } });
-    typeof window < "u" && window.dispatchEvent(s), t = O0(H[Fe], u), t || (t = c);
-  }
-  if (!t.includes(":"))
+  if (t || (typeof window < "u" && window.dispatchEvent(new CustomEvent("translation:missing", { detail: { key: c } })), t = O0(H[Fe], u), t || (t = c)), !t.includes(":"))
     return t;
   const i = t.split(/(:\w+)/g);
   let a = !1;

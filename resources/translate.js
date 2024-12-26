@@ -49,10 +49,8 @@ const translate = function(string, args, markdown = false){
     let value = getLodash(globalTranslations[locale], string)
 
     if (! value) {
-        const event = new CustomEvent("translation:missing", {detail: {key: originalString}});
-
         if (typeof window !== 'undefined') {
-            window.dispatchEvent(event);
+            window.dispatchEvent(new CustomEvent("translation:missing", {detail: {key: originalString}}));
         }
 
         value = getLodash(globalTranslations[defaultLocale], string)

@@ -69,3 +69,7 @@ v2.1.0
 - Added actions for generate files
 - Change caching strategy
 - Removed window and document from js code
+
+v2.1.1
+
+- Fix error on ssr related to CustomEvent not defined
