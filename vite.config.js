@@ -9,12 +9,22 @@ export default defineConfig({
     ],
     build: {
         outDir: 'dist',
+        lib: {
+            entry: 'resources/translate.js',
+            name: 'Translate',
+            fileName: (format) => `translate.${format}.js`,
+            formats: ['es', 'cjs', 'umd'], // Generate multiple formats
+        },
+
         rollupOptions: {
-            output: {
-                entryFileNames: `[name].js`,
-                chunkFileNames: `[name].js`,
-                assetFileNames: `[name].[ext]`,
+            globals: {
+                // Add global dependencies if needed
             },
+            // output: {
+            //     entryFileNames: `[name].js`,
+            //     chunkFileNames: `[name].js`,
+            //     assetFileNames: `[name].[ext]`,
+            // },
         },
     }
 });

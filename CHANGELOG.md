@@ -43,3 +43,10 @@ v2.0.1
 v2.0.2
 
 - Add parameter for markdown parser
+
+v2.1.0
+
+- Added exports for translate function (to use it in ssr)
+- Added actions for generate files
+- Change caching strategy
+- Removed window and document from js code

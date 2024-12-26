@@ -1,6 +1,6 @@
 {
   "resources/translate.js": {
-    "file": "translate.js",
+    "file": "translate.umd.js",
     "name": "translate",
     "src": "resources/translate.js",
     "isEntry": true

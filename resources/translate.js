@@ -2,7 +2,8 @@ import getLodash from 'lodash/get'
 import MarkdownIt from "markdown-it";
 
 const defaultLocale = 'en'
-const getLocale = () => document.documentElement.lang || defaultLocale;
+const globalTranslations = {}
+let locale = defaultLocale
 
 const generateRandomString = (length = 16, charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') => {
     let result = '';
@@ -20,12 +21,12 @@ const isReactElement = (obj) =>
     obj && typeof obj === 'object' && obj.$$typeof === Symbol.for('react.element');
 
 /**
- * Translate strings using the window.i18n object.
+ * Translate strings using the globalTranslations object.
  * Usage:
  * __('auth.failed') -> 'Authentication failed'
  * __('auth.failed', {name: 'John'}) -> 'Authentication failed for John'
  */
-window.trans = window.translate = window.__  = function(string, args, markdown = false){
+const translate = function(string, args, markdown = false){
     if (markdown) {
         const md = new MarkdownIt({
             html: true,
@@ -40,19 +41,21 @@ window.trans = window.translate = window.__  = function(string, args, markdown =
 
     const key = string.substr(0, string.indexOf('.'))
     const originalString = string
-    const locale = getLocale()
 
-    if (! key || (! window.i18n[locale].__possible_keys.includes(key) && ! window.i18n[defaultLocale].__possible_keys.includes(key))) {
+    if (! key || (! globalTranslations[locale].__possible_keys.includes(key) && ! globalTranslations[defaultLocale].__possible_keys.includes(key))) {
         string = '__global.' + string
     }
 
-    let value = getLodash(window.i18n[locale], string)
+    let value = getLodash(globalTranslations[locale], string)
 
     if (! value) {
         const event = new CustomEvent("translation:missing", {detail: {key: originalString}});
-        window.dispatchEvent(event);
 
-        value = getLodash(window.i18n[defaultLocale], string)
+        if (typeof window !== 'undefined') {
+            window.dispatchEvent(event);
+        }
+
+        value = getLodash(globalTranslations[defaultLocale], string)
 
         if (! value) {
             value = originalString
@@ -91,3 +94,19 @@ window.trans = window.translate = window.__  = function(string, args, markdown =
 
     return !containsReactElement ? result.join('') : result;
 }
+
+if (typeof window !== 'undefined') {
+    window.trans = window.translate = window.__ = translate;
+    window.setTranslations = (translations, lang) => {
+        globalTranslations[lang] = translations
+    }
+    window.setLocale = (lang) => {
+        locale = lang
+    }
+}
+
+export const jstranslate = (translations, lang) => {
+    locale = lang
+    globalTranslations[lang] = translations
+    return translate
+};

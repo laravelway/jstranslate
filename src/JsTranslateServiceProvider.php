@@ -2,7 +2,7 @@
 
 namespace LaravelWay\JsTranslate;
 
-use LaravelWay\JsTranslate\Console\Commands\ClearCacheCommand;
+use LaravelWay\JsTranslate\Console\Commands\CacheCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -18,7 +18,7 @@ class JsTranslateServiceProvider extends PackageServiceProvider
         $package
             ->name('jstranslate')
             ->hasConfigFile('jstranslate')
-            ->hasCommand(ClearCacheCommand::class)
+            ->hasCommand(CacheCommand::class)
             ->hasRoutes(['jstranslate']);
     }
 }
