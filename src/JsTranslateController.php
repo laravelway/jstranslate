@@ -4,8 +4,6 @@ namespace LaravelWay\JsTranslate;
 
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 use JsonException;
 use LaravelWay\JsTranslate\Actions\JsTranslateScriptGenerate;
 use LaravelWay\JsTranslate\Actions\JsTranslationGenerate;
