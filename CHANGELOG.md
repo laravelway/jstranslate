@@ -7,6 +7,14 @@ v2.0.0
 - Switch from webpack to vite
 - Added command do clear cached files
 
+## v2.1.1 - 2024-12-26
+
+### What's Changed
+
+- Fix error on ssr related to CustomEvent not defined
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.1.0...v2.1.1
+
 ## v2.1.0 - 2024-12-26
 
 ### What's Changed
