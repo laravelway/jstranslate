@@ -7,6 +7,14 @@ v2.0.0
 - Switch from webpack to vite
 - Added command do clear cached files
 
+## v2.1.2 - 2024-12-27
+
+### What's Changed
+
+- Fix replacement issue when value is 0
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.1.1...v2.1.2
+
 ## v2.1.1 - 2024-12-26
 
 ### What's Changed
