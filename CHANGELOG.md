@@ -73,3 +73,7 @@ v2.1.0
 v2.1.1
 
 - Fix error on ssr related to CustomEvent not defined
+
+v2.1.2
+
+- Fix replacement issue when value is 0

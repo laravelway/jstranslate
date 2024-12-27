@@ -3709,7 +3709,7 @@ const fi = (u = 16, e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012
       return li(l) && (l = {
         ...l,
         key: fi()
-      }, a = !0), l || s;
+      }, a = !0), l ?? s;
     }
     return s;
   });

@@ -84,7 +84,7 @@ const translate = function(string, args, markdown = false){
             }
 
             // If replacement is not a React element, return it as plain text
-            return replacement || part;
+            return replacement !== null && replacement !== undefined ? replacement : part;
         }
 
         return part;

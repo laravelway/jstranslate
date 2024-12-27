@@ -1,7 +1,7 @@
 {
     "name": "laravelway/jstranslate",
     "description": "Laravel package for translations on frontend",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "keywords": [
         "laravelway",
         "laravel",
