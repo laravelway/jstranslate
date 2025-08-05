@@ -1,4 +1,12 @@
 # Changelog
+## v2.1.4 - 2025-08-05
+
+### What's Changed
+
+- Bump stefanzweifel/git-auto-commit-action from 5 to 6
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.1.3...v2.1.4
+
 
 ## v2.1.3 - 2025-08-05
 
