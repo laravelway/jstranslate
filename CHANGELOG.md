@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.1.3 - 2025-08-05
+
+### What's Changed
+
+- Updated node dependencies
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.1.2...v2.1.3
+
 ## v2.1.2 - 2024-12-27
 
 ### What's Changed
