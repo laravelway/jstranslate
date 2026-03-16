@@ -133,10 +133,10 @@ var qu, Xe;
 function $r() {
   if (Xe) return qu;
   Xe = 1;
-  var u = jr(), e = function() {
+  var u = jr(), e = (function() {
     var n = /[^.]+$/.exec(u && u.keys && u.keys.IE_PROTO || "");
     return n ? "Symbol(src)_1." + n : "";
-  }();
+  })();
   function r(n) {
     return !!e && e in n;
   }
@@ -2608,17 +2608,20 @@ function fc(u, e) {
   if (!a) return !1;
   let i = a.url;
   if (i.length <= t.length) return !1;
-  i = i.replace(/\*+$/, "");
-  const o = u.md.normalizeLink(i);
-  if (!u.md.validateLink(o)) return !1;
+  let o = i.length;
+  for (; o > 0 && i.charCodeAt(o - 1) === 42; )
+    o--;
+  o !== i.length && (i = i.slice(0, o));
+  const s = u.md.normalizeLink(i);
+  if (!u.md.validateLink(s)) return !1;
   if (!e) {
     u.pending = u.pending.slice(0, -t.length);
-    const s = u.push("link_open", "a", 1);
-    s.attrs = [["href", o]], s.markup = "linkify", s.info = "auto";
-    const f = u.push("text", "", 0);
-    f.content = u.md.normalizeLinkText(i);
-    const l = u.push("link_close", "a", -1);
-    l.markup = "linkify", l.info = "auto";
+    const f = u.push("link_open", "a", 1);
+    f.attrs = [["href", s]], f.markup = "linkify", f.info = "auto";
+    const l = u.push("text", "", 0);
+    l.content = u.md.normalizeLinkText(i);
+    const b = u.push("link_close", "a", -1);
+    b.markup = "linkify", b.info = "auto";
   }
   return u.pos += i.length - t.length, !0;
 }

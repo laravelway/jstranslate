@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.2.0 - 2026-03-16
+
+### What's Changed
+
+- Migrated build tooling from webpack/babel to Vite
+- Removed webpack, webpack-cli, babel-loader, @babel/core, @babel/preset-env devDependencies
+- Added vite as devDependency
+- Added markdown-it as a bundled dependency (was missing from package.json)
+- Updated lodash to ^4.17.21
+- Added package.json fields: name, version, main, module, exports, files for npm publishing
+- Build now generates ES, CJS, and UMD formats in dist/
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.1.4...v2.2.0
+
 ## v2.1.4 - 2025-08-05
 
 ### What's Changed
