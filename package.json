@@ -1,6 +1,6 @@
 {
   "name": "@laravelway/jstranslate",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Laravel package for translations on frontend",
   "main": "dist/translate.cjs.js",
   "module": "dist/translate.es.js",
