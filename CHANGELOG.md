@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.2.1 - 2026-04-02
+
+**Full Changelog**: https://github.com/laravelway/jstranslate/compare/v2.2.0...v2.2.1
+
 ## v2.2.0 - 2026-03-16
 
 ### What's Changed
